@@ -117,83 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="picLogo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>607, 7</value>
+  <data name="FeaturePageDescription" xml:space="preserve">
+    <value>请选择需要安装的软件功能。</value>
   </data>
-  <data name="lblDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 30</value>
+  <data name="FeaturePageTitle" xml:space="preserve">
+    <value>软件功能选择</value>
   </data>
-  <data name="lblDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 61</value>
+  <data name="FinishPageDescription" xml:space="preserve">
+    <value>Installer向导已成功完成了软件的安装，请单击完成按钮退出向导。</value>
   </data>
-  <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9pt, style=Bold</value>
+  <data name="FinishPageTitle" xml:space="preserve">
+    <value>Installer向导已成功完成</value>
   </data>
-  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 15</value>
+  <data name="InstallationFolderPattern" xml:space="preserve">
+    <value>软件安装路径：{0}</value>
   </data>
-  <data name="pnlTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>799, 100</value>
+  <data name="InstallingPageDescription" xml:space="preserve">
+    <value>正在安装所选软件功能，请稍候。。。</value>
   </data>
-  <data name="pnlLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 8</value>
+  <data name="InstallingPageTitle" xml:space="preserve">
+    <value>正在安装软件</value>
   </data>
-  <data name="pnlLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>797, 1</value>
+  <data name="LicensePageDescription" xml:space="preserve">
+    <value>在进行下一步之前，您必须首先接受软件许可协议。如您拒绝接受，请单击取消按钮。</value>
   </data>
-  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>695, 17</value>
+  <data name="LicensePageTitle" xml:space="preserve">
+    <value>软件许可协议</value>
   </data>
-  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 30</value>
+  <data name="SelectedFeaturePattern" xml:space="preserve">
+    <value>所选软件功能：{0}</value>
   </data>
-  <data name="btnCancel.Text" xml:space="preserve">
-    <value>取消(&amp;C)</value>
+  <data name="SummaryPageDescription" xml:space="preserve">
+    <value>请检查下面的汇总信息，然后单击下一步按钮开始安装。</value>
   </data>
-  <data name="btnFinish.Location" type="System.Drawing.Point, System.Drawing">
-    <value>588, 17</value>
+  <data name="SummaryPageTitle" xml:space="preserve">
+    <value>安装信息汇总</value>
   </data>
-  <data name="btnFinish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 30</value>
+  <data name="WelcomePageDescription" xml:space="preserve">
+    <value>欢迎使用软件安装向导，本向导将指导您一步步地对软件的安装过程进行配置，并最终完成软件的安装。请单击Next按钮以继续。</value>
   </data>
-  <data name="btnFinish.Text" xml:space="preserve">
-    <value>完成(&amp;F)</value>
-  </data>
-  <data name="btnNext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>481, 17</value>
-  </data>
-  <data name="btnNext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 30</value>
-  </data>
-  <data name="btnNext.Text" xml:space="preserve">
-    <value>下一步(&amp;N)</value>
-  </data>
-  <data name="btnPrevious.Location" type="System.Drawing.Point, System.Drawing">
-    <value>374, 17</value>
-  </data>
-  <data name="btnPrevious.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 30</value>
-  </data>
-  <data name="btnPrevious.Text" xml:space="preserve">
-    <value>上一步(&amp;P)</value>
-  </data>
-  <data name="pnlButtons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 510</value>
-  </data>
-  <data name="pnlButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>799, 57</value>
-  </data>
-  <data name="pnlContent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>799, 410</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 15</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>799, 567</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9pt</value>
+  <data name="WelcomePageTitle" xml:space="preserve">
+    <value>欢迎使用软件安装向导</value>
   </data>
 </root>

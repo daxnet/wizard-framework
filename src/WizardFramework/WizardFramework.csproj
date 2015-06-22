@@ -70,11 +70,11 @@
     </Compile>
     <Compile Include="WizardPageDisplay.cs" />
     <Compile Include="WizardPageType.cs" />
-    <Compile Include="_WizardPage.cs">
+    <Compile Include="WizardPageBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="_WizardPage.Designer.cs">
-      <DependentUpon>_WizardPage.cs</DependentUpon>
+    <Compile Include="WizardPageBase.Designer.cs">
+      <DependentUpon>WizardPageBase.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

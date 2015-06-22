@@ -1,6 +1,6 @@
 ﻿namespace WizardFramework
 {
-    partial class _WizardPage
+    partial class WizardPageBase
     {
         /// <summary> 
         /// Required designer variable.

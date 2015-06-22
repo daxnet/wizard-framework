@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Wizard));
             this.pnlTitle = new System.Windows.Forms.Panel();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlButtons = new System.Windows.Forms.Panel();
@@ -40,17 +41,25 @@
             this.btnPrevious = new System.Windows.Forms.Button();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnlTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTitle
             // 
-            resources.ApplyResources(this.pnlTitle, "pnlTitle");
             this.pnlTitle.BackColor = System.Drawing.Color.White;
             this.pnlTitle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlTitle.Controls.Add(this.picLogo);
             this.pnlTitle.Controls.Add(this.lblDescription);
             this.pnlTitle.Controls.Add(this.lblTitle);
+            resources.ApplyResources(this.pnlTitle, "pnlTitle");
             this.pnlTitle.Name = "pnlTitle";
+            // 
+            // picLogo
+            // 
+            resources.ApplyResources(this.picLogo, "picLogo");
+            this.picLogo.Name = "picLogo";
+            this.picLogo.TabStop = false;
             // 
             // lblDescription
             // 
@@ -64,12 +73,12 @@
             // 
             // pnlButtons
             // 
-            resources.ApplyResources(this.pnlButtons, "pnlButtons");
             this.pnlButtons.Controls.Add(this.pnlLine);
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnFinish);
             this.pnlButtons.Controls.Add(this.btnNext);
             this.pnlButtons.Controls.Add(this.btnPrevious);
+            resources.ApplyResources(this.pnlButtons, "pnlButtons");
             this.pnlButtons.Name = "pnlButtons";
             // 
             // pnlLine
@@ -84,6 +93,7 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnFinish
             // 
@@ -126,6 +136,7 @@
             this.Name = "Wizard";
             this.pnlTitle.ResumeLayout(false);
             this.pnlTitle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -143,5 +154,6 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Panel pnlLine;
+        private System.Windows.Forms.PictureBox picLogo;
     }
 }

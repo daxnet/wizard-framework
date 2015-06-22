@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -8,8 +9,9 @@ namespace WizardFramework
     /// <summary>
     /// Represents the base class of wizard pages. 
     /// </summary>
-    public abstract partial class _WizardPage : UserControl, IWizardPage
+    public abstract partial class WizardPageBase : UserControl, IWizardPage
     {
+
         #region Private Fields
 
         private readonly string description;
@@ -30,12 +32,22 @@ namespace WizardFramework
 
         #endregion Private Fields
 
+        #region Public Events
+
+        /// <summary>
+        /// Occurs when the navigation states have been updated via <c> CanGoCancel </c>, <c>
+        /// CanGoFinishPage </c>, <c> CanGoNextPage </c> and <c> CanGoPreviousPage </c> properties.
+        /// </summary>
+        public event EventHandler NavigationStateUpdated;
+
+        #endregion Public Events
+
         #region Protected Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="_WizardPage" /> class. 
+        /// Initializes a new instance of the <see cref="WizardPageBase" /> class. 
         /// </summary>
-        protected _WizardPage()
+        protected WizardPageBase()
         {
             InitializeComponent();
             this.CanGoFinishPage = false;
@@ -45,7 +57,7 @@ namespace WizardFramework
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="_WizardPage" /> class. 
+        /// Initializes a new instance of the <see cref="WizardPageBase" /> class. 
         /// </summary>
         /// <param name="title"> The title of the current wizard page. </param>
         /// <param name="description"> The description of the current wizard page. </param>
@@ -53,12 +65,12 @@ namespace WizardFramework
         /// The <see cref="Wizard" /> instance which contains the current wizard page.
         /// </param>
         /// <param name="model"> The data model of the current wizard page. </param>
-        protected _WizardPage(string title, string description, Wizard wizard, IWizardModel model)
+        protected WizardPageBase(string title, string description, Wizard wizard, IWizardModel model)
             : this(title, description, wizard, model, WizardPageType.Standard)
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="_WizardPage" /> class. 
+        /// Initializes a new instance of the <see cref="WizardPageBase" /> class. 
         /// </summary>
         /// <param name="title"> The title of the current wizard page. </param>
         /// <param name="description"> The description of the current wizard page. </param>
@@ -67,7 +79,7 @@ namespace WizardFramework
         /// </param>
         /// <param name="model"> The data model of the current wizard page. </param>
         /// <param name="type"> The type of the current wizard page. </param>
-        protected _WizardPage(string title, string description, Wizard wizard, IWizardModel model, WizardPageType type)
+        protected WizardPageBase(string title, string description, Wizard wizard, IWizardModel model, WizardPageType type)
             : this()
         {
             this.title = title;
@@ -78,16 +90,6 @@ namespace WizardFramework
         }
 
         #endregion Protected Constructors
-
-        #region Public Events
-
-        /// <summary>
-        /// Occurs when the navigation states have been updated via <c> CanGoCancel </c>, <c>
-        /// CanGoFinishPage </c>, <c> CanGoNextPage </c> and <c> CanGoPreviousPage </c> properties.
-        /// </summary>
-        public event EventHandler NavigationStateUpdated;
-
-        #endregion Public Events
 
         #region Public Properties
 
@@ -241,7 +243,34 @@ namespace WizardFramework
 
         #endregion Public Properties
 
+        #region Protected Internal Properties
+
+        /// <summary>
+        /// Gets the focusing control, which will be focused when the wizard page is showing.
+        /// </summary>
+        /// <value>
+        /// The focusing control.
+        /// </value>
+        protected internal abstract Control FocusingControl { get; }
+
+        /// <summary>
+        /// Gets the logo image to be shown on the title area of the wizard.
+        /// </summary>
+        /// <value>
+        /// The logo image.
+        /// </value>
+        protected internal abstract Image Logo { get; }
+
+        #endregion Protected Internal Properties
+
         #region Protected Internal Methods
+
+        /// <summary>
+        /// The callback method being executed when user clicks the Finish button on the wizard,
+        /// but before the wizard is going to finish and close.
+        /// </summary>
+        /// <returns><c>True</c> if the wizard can go to the finish page, otherwise, <c>false</c>.</returns>
+        protected internal abstract Task<bool> ExecuteBeforeGoingFinishAsync();
 
         /// <summary>
         /// The callback method being executed when user clicks the Next button on the wizard, but
@@ -256,14 +285,6 @@ namespace WizardFramework
         /// </summary>
         /// <returns><c>True</c> if the wizard can go to the previous page, otherwise, <c>false</c>.</returns>
         protected internal abstract Task<bool> ExecuteBeforeGoingPreviousAsync();
-
-        /// <summary>
-        /// The callback method being executed when user clicks the Finish button on the wizard,
-        /// but before the wizard is going to finish and close.
-        /// </summary>
-        /// <returns><c>True</c> if the wizard can go to the finish page, otherwise, <c>false</c>.</returns>
-        protected internal abstract Task<bool> ExecuteBeforeGoingFinishAsync();
-
         /// <summary>
         /// The callback method being executed when the current wizard page is showing. 
         /// </summary>
@@ -273,14 +294,6 @@ namespace WizardFramework
         /// Persists the values on current wizard page to the data model. 
         /// </summary>
         protected internal abstract void PersistValuesToModel();
-
-        /// <summary>
-        /// Gets the focusing control, which will be focused when the wizard page is showing.
-        /// </summary>
-        /// <value>
-        /// The focusing control.
-        /// </value>
-        protected internal abstract Control FocusingControl { get; }
 
         #endregion Protected Internal Methods
 
@@ -298,6 +311,24 @@ namespace WizardFramework
             return this.model as T;
         }
 
+        /// <summary>
+        /// Goes to the next page asynchronously.
+        /// </summary>
+        /// <returns></returns>
+        protected async Task NextAsync()
+        {
+            await wizard.GoNextPageAsync();
+        }
+
+        /// <summary>
+        /// Goes to the previous page asynchronously.
+        /// </summary>
+        /// <returns></returns>
+        protected async Task PreviousAsync()
+        {
+            await wizard.GoPreviousPageAsync();
+        }
+
         #endregion Protected Methods
 
         #region Private Methods
@@ -312,5 +343,6 @@ namespace WizardFramework
         }
 
         #endregion Private Methods
+
     }
 }

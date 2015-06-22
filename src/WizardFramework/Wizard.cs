@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WizardFramework
@@ -17,9 +18,10 @@ namespace WizardFramework
     /// </remarks>
     public partial class Wizard : Form, IWizard
     {
+
         #region Private Fields
 
-        private readonly List<Tuple<_WizardPage, bool>> wizardPages = new List<Tuple<_WizardPage, bool>>();
+        private readonly List<Tuple<WizardPageBase, bool>> wizardPages = new List<Tuple<WizardPageBase, bool>>();
 
         private volatile int currentPageIndex = 0;
 
@@ -45,18 +47,48 @@ namespace WizardFramework
         #region Public Properties
 
         /// <summary>
+        /// Gets or sets the text for the Cancel button.
+        /// </summary>
+        /// <value>
+        /// The text for the Cancel button.
+        /// </value>
+        [Category("Wizard")]
+        [Description("Gets or sets the text for the Cancel button.")]
+        public string CancelText
+        {
+            get { return this.btnCancel.Text; }
+            set { this.btnCancel.Text = value; }
+        }
+
+        /// <summary>
         /// Gets the number of elements contained in the <see
         /// cref="T:System.Collections.Generic.ICollection`1" />.
         /// </summary>
+        [Browsable(false)]
         public int Count
         {
             get { return this.wizardPages.Count; }
         }
 
         /// <summary>
+        /// Gets or sets the text for the Finish button.
+        /// </summary>
+        /// <value>
+        /// The text for the Finish button.
+        /// </value>
+        [Category("Wizard")]
+        [Description("Gets or sets the text for the Finish button.")]
+        public string FinishText
+        {
+            get { return this.btnFinish.Text; }
+            set { this.btnFinish.Text = value; }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether the <see
         /// cref="T:System.Collections.Generic.ICollection`1" /> is read-only.
         /// </summary>
+        [Browsable(false)]
         public bool IsReadOnly
         {
             get { return false; }
@@ -67,16 +99,45 @@ namespace WizardFramework
         /// each wizard page in the wizard.
         /// </summary>
         /// <value> The list of <see cref="IWizardModel" /> instances. </value>
+        [Browsable(false)]
         public IEnumerable<IWizardModel> Models
         {
             get { return this.wizardPages.Select(p => p.Item1.Model); }
+        }
+
+        /// <summary>
+        /// Gets or sets the text for the Next button.
+        /// </summary>
+        /// <value>
+        /// The text for the Next button.
+        /// </value>
+        [Category("Wizard")]
+        [Description("Gets or sets the text for the Next button.")]
+        public string NextText
+        {
+            get { return this.btnNext.Text; }
+            set { this.btnNext.Text = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the text for the Previous button.
+        /// </summary>
+        /// <value>
+        /// The text for the Previous button.
+        /// </value>
+        [Category("Wizard")]
+        [Description("Gets or sets the text for the Previous button.")]
+        public string PreviousText
+        {
+            get { return this.btnPrevious.Text; }
+            set { this.btnPrevious.Text = value; }
         }
 
         #endregion Public Properties
 
         #region Private Properties
 
-        private _WizardPage CurrentPage
+        private WizardPageBase CurrentPage
         {
             get
             {
@@ -85,7 +146,7 @@ namespace WizardFramework
                 {
                     return null;
                 }
-                return this.pnlContent.Controls[0] as _WizardPage;
+                return this.pnlContent.Controls[0] as WizardPageBase;
             }
         }
 
@@ -99,10 +160,10 @@ namespace WizardFramework
         /// <param name="item">
         /// The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.
         /// </param>
-        public void Add(_WizardPage item)
+        public void Add(WizardPageBase item)
         {
             item.NavigationStateUpdated += WizardPageNavigationStatusUpdateHandler;
-            this.wizardPages.Add(new Tuple<_WizardPage, bool>(item, true));
+            this.wizardPages.Add(new Tuple<WizardPageBase, bool>(item, true));
         }
 
         /// <summary>
@@ -128,7 +189,7 @@ namespace WizardFramework
         /// true if <paramref name="item" /> is found in the <see
         /// cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
         /// </returns>
-        public bool Contains(_WizardPage item)
+        public bool Contains(WizardPageBase item)
         {
             return this.wizardPages.Exists(p => p.Item1 == item);
         }
@@ -138,7 +199,7 @@ namespace WizardFramework
         /// </summary>
         /// <param name="array"> The array. </param>
         /// <param name="arrayIndex"> Index of the array. </param>
-        public void CopyTo(_WizardPage[] array, int arrayIndex)
+        public void CopyTo(WizardPageBase[] array, int arrayIndex)
         {
             this.wizardPages.Select(p => p.Item1).ToList().CopyTo(array, arrayIndex);
         }
@@ -147,12 +208,12 @@ namespace WizardFramework
         /// The factory method for creating a wizard page with specific wizard type. 
         /// </summary>
         /// <typeparam name="T"> The type of the wizard page to be created. </typeparam>
-        /// <returns> A <see cref="_WizardPage" /> instance that is created. </returns>
+        /// <returns> A <see cref="WizardPageBase" /> instance that is created. </returns>
         /// <exception cref="System.InvalidOperationException">
         /// Cannot create a wizard page with no public constructor which takes the IWizard instance
         /// as its only parameter.
         /// </exception>
-        public T CreatePage<T>() where T : _WizardPage
+        public T CreatePage<T>() where T : WizardPageBase
         {
             var constructorInfo = typeof(T).GetConstructor(new[] { typeof(Wizard) });
             if (constructorInfo == null)
@@ -169,7 +230,7 @@ namespace WizardFramework
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate
         /// through the collection.
         /// </returns>
-        public IEnumerator<_WizardPage> GetEnumerator()
+        public IEnumerator<WizardPageBase> GetEnumerator()
         {
             return this.wizardPages.Select(p => p.Item1).GetEnumerator();
         }
@@ -208,7 +269,7 @@ namespace WizardFramework
         /// returns false if <paramref name="item" /> is not found in the original <see
         /// cref="T:System.Collections.Generic.ICollection`1" />.
         /// </returns>
-        public bool Remove(_WizardPage item)
+        public bool Remove(WizardPageBase item)
         {
             item.NavigationStateUpdated -= WizardPageNavigationStatusUpdateHandler;
             var removable = this.wizardPages.FirstOrDefault(t => t.Item1 == item);
@@ -227,11 +288,11 @@ namespace WizardFramework
             switch (display)
             {
                 case WizardPageDisplay.Hide:
-                    this.wizardPages[pageIndex] = new Tuple<_WizardPage, bool>(this.wizardPages[pageIndex].Item1, false);
+                    this.wizardPages[pageIndex] = new Tuple<WizardPageBase, bool>(this.wizardPages[pageIndex].Item1, false);
                     break;
 
                 case WizardPageDisplay.Show:
-                    this.wizardPages[pageIndex] = new Tuple<_WizardPage, bool>(this.wizardPages[pageIndex].Item1, true);
+                    this.wizardPages[pageIndex] = new Tuple<WizardPageBase, bool>(this.wizardPages[pageIndex].Item1, true);
                     break;
 
                 default:
@@ -247,7 +308,7 @@ namespace WizardFramework
         /// </typeparam>
         /// <param name="display"> The display behavior. </param>
         public void SetPageDisplay<T>(WizardPageDisplay display)
-            where T : _WizardPage
+            where T : WizardPageBase
         {
             var index = this.wizardPages.FindIndex(pred => pred.Item1.GetType() == typeof(T));
             this.SetPageDisplay(index, display);
@@ -266,6 +327,68 @@ namespace WizardFramework
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        /// <summary>
+        /// Goes to the next page.
+        /// </summary>
+        /// <returns></returns>
+        internal async Task GoNextPageAsync()
+        {
+            using (new LengthyOperation(this))
+            {
+                var wizardPage = this.wizardPages[currentPageIndex].Item1;
+                if (!await wizardPage.ExecuteBeforeGoingNextAsync())
+                {
+                    return;
+                }
+                while (currentPageIndex < this.Count - 1)
+                {
+                    currentPageIndex++;
+                    if (!this.wizardPages[currentPageIndex].Item2)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        ShowWizardPage(currentPageIndex);
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Goes to the previous page.
+        /// </summary>
+        /// <returns></returns>
+        internal async Task GoPreviousPageAsync()
+        {
+            using (new LengthyOperation(this))
+            {
+                var wizardPage = this.wizardPages[currentPageIndex].Item1;
+                if (!await wizardPage.ExecuteBeforeGoingPreviousAsync())
+                {
+                    return;
+                }
+                while (currentPageIndex > 0)
+                {
+                    currentPageIndex--;
+                    if (!this.wizardPages[currentPageIndex].Item2)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        ShowWizardPage(currentPageIndex);
+                        break;
+                    }
+                }
+            }
+        }
+
+        #endregion Internal Methods
 
         #region Protected Methods
 
@@ -299,54 +422,10 @@ namespace WizardFramework
 
         #region Private Methods
 
-        private async void btnNext_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            using (new LengthyOperation(this))
-            {
-                var wizardPage = this.wizardPages[currentPageIndex].Item1;
-                if (!await wizardPage.ExecuteBeforeGoingNextAsync())
-                {
-                    return;
-                }
-                while (currentPageIndex < this.Count - 1)
-                {
-                    currentPageIndex++;
-                    if (!this.wizardPages[currentPageIndex].Item2)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        ShowWizardPage(currentPageIndex);
-                        break;
-                    }
-                }
-            }
-        }
-
-        private async void btnPrevious_Click(object sender, EventArgs e)
-        {
-            using (new LengthyOperation(this))
-            {
-                var wizardPage = this.wizardPages[currentPageIndex].Item1;
-                if (! await wizardPage.ExecuteBeforeGoingPreviousAsync())
-                {
-                    return;
-                }
-                while (currentPageIndex > 0)
-                {
-                    currentPageIndex--;
-                    if (!this.wizardPages[currentPageIndex].Item2)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        ShowWizardPage(currentPageIndex);
-                        break;
-                    }
-                }
-            }
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            Close();
         }
 
         private async void btnFinish_Click(object sender, EventArgs e)
@@ -354,17 +433,26 @@ namespace WizardFramework
             using (new LengthyOperation(this))
             {
                 var wizardPage = this.wizardPages[currentPageIndex].Item1;
-                if (! await wizardPage.ExecuteBeforeGoingFinishAsync())
+                if (!await wizardPage.ExecuteBeforeGoingFinishAsync())
                 {
                     DialogResult = DialogResult.None;
                 }
                 else
                 {
                     DialogResult = DialogResult.OK;
+                    Close();
                 }
             }
         }
 
+        private async void btnNext_Click(object sender, EventArgs e)
+        {
+            await GoNextPageAsync();
+        }
+        private async void btnPrevious_Click(object sender, EventArgs e)
+        {
+            await GoPreviousPageAsync();
+        }
         private void OnDispose(bool disposing)
         {
             this.Clear();
@@ -372,11 +460,25 @@ namespace WizardFramework
 
         private void pnlContent_ControlAdded(object sender, ControlEventArgs e)
         {
-            if (e.Control != null && e.Control is _WizardPage)
+            if (e.Control != null && e.Control is WizardPageBase)
             {
-                var wizardPage = e.Control as _WizardPage;
+                var wizardPage = e.Control as WizardPageBase;
                 this.lblTitle.Text = wizardPage.Title;
                 this.lblDescription.Text = wizardPage.Description;
+                this.lblTitle.Refresh();
+                this.lblDescription.Refresh();
+                if (wizardPage.Logo != null)
+                {
+                    picLogo.Visible = true;
+                    picLogo.Image = wizardPage.Logo;
+                    lblDescription.Width = picLogo.Left - lblDescription.Left;
+                }
+                else
+                {
+                    picLogo.Visible = false;
+                    picLogo.Image = null;
+                    lblDescription.Width = picLogo.Left + picLogo.Width - lblDescription.Left;
+                }
                 switch (wizardPage.Type)
                 {
                     case WizardPageType.Expanded:
@@ -387,7 +489,6 @@ namespace WizardFramework
                         pnlTitle.Visible = true;
                         break;
                 }
-                // wizardPage.RestoreValuesFromModel();
                 this.UpdateButtonState(wizardPage);
             }
         }
@@ -398,9 +499,9 @@ namespace WizardFramework
                 e.Control.Tag != null && 
                 e.Control.Tag is bool && 
                 !(bool)e.Control.Tag && 
-                e.Control is _WizardPage)
+                e.Control is WizardPageBase)
             {
-                (e.Control as _WizardPage).PersistValuesToModel();
+                (e.Control as WizardPageBase).PersistValuesToModel();
             }
         }
 
@@ -431,6 +532,12 @@ namespace WizardFramework
                 }
                 UpdateAcceptButton();
             }
+            else
+            {
+                UpdateButtonState(WizardPage.GetEmptyPage(this));
+                this.lblTitle.Text = string.Empty;
+                this.lblDescription.Text = string.Empty;
+            }
         }
 
         private void UpdateAcceptButton()
@@ -453,7 +560,7 @@ namespace WizardFramework
             }
         }
 
-        private void UpdateButtonState(_WizardPage wizardPage)
+        private void UpdateButtonState(WizardPageBase wizardPage)
         {
             if (wizardPage != null)
             {

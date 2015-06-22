@@ -118,82 +118,73 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="picLogo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>607, 7</value>
+  <data name="rbMinimal.Font" type="System.Drawing.Font, System.Drawing">
+    <value>SimSun, 13.8pt, style=Bold</value>
   </data>
-  <data name="lblDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 30</value>
+  <data name="rbMinimal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 30</value>
   </data>
-  <data name="lblDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 61</value>
+  <data name="rbMinimal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 28</value>
   </data>
-  <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9pt, style=Bold</value>
+  <data name="rbMinimal.Text" xml:space="preserve">
+    <value>最小化安装</value>
   </data>
-  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 15</value>
+  <data name="rbStandard.Font" type="System.Drawing.Font, System.Drawing">
+    <value>SimSun, 13.8pt, style=Bold</value>
   </data>
-  <data name="pnlTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>799, 100</value>
+  <data name="rbStandard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 91</value>
   </data>
-  <data name="pnlLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 8</value>
+  <data name="rbStandard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 28</value>
   </data>
-  <data name="pnlLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>797, 1</value>
+  <data name="rbStandard.Text" xml:space="preserve">
+    <value>标准安装</value>
   </data>
-  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>695, 17</value>
+  <data name="rbFull.Font" type="System.Drawing.Font, System.Drawing">
+    <value>SimSun, 13.8pt, style=Bold</value>
   </data>
-  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 30</value>
+  <data name="rbFull.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 157</value>
   </data>
-  <data name="btnCancel.Text" xml:space="preserve">
-    <value>取消(&amp;C)</value>
+  <data name="rbFull.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 28</value>
   </data>
-  <data name="btnFinish.Location" type="System.Drawing.Point, System.Drawing">
-    <value>588, 17</value>
+  <data name="rbFull.Text" xml:space="preserve">
+    <value>完全安装</value>
   </data>
-  <data name="btnFinish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 30</value>
+  <data name="btnBrowse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>407, 25</value>
   </data>
-  <data name="btnFinish.Text" xml:space="preserve">
-    <value>完成(&amp;F)</value>
+  <data name="btnBrowse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 31</value>
   </data>
-  <data name="btnNext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>481, 17</value>
+  <data name="btnBrowse.Text" xml:space="preserve">
+    <value>选择安装目录(&amp;B)</value>
   </data>
-  <data name="btnNext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 30</value>
+  <data name="txtInstPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 30</value>
   </data>
-  <data name="btnNext.Text" xml:space="preserve">
-    <value>下一步(&amp;N)</value>
+  <data name="txtInstPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 25</value>
   </data>
-  <data name="btnPrevious.Location" type="System.Drawing.Point, System.Drawing">
-    <value>374, 17</value>
+  <data name="grpInstallationFolder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 219</value>
   </data>
-  <data name="btnPrevious.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 30</value>
+  <data name="grpInstallationFolder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>578, 72</value>
   </data>
-  <data name="btnPrevious.Text" xml:space="preserve">
-    <value>上一步(&amp;P)</value>
-  </data>
-  <data name="pnlButtons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 510</value>
-  </data>
-  <data name="pnlButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>799, 57</value>
-  </data>
-  <data name="pnlContent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>799, 410</value>
+  <data name="grpInstallationFolder.Text" xml:space="preserve">
+    <value>安装目录</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>8, 15</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>799, 567</value>
-  </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>SimSun, 9pt</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>610, 321</value>
   </data>
 </root>

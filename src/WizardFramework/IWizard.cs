@@ -6,7 +6,7 @@ namespace WizardFramework
     /// <summary>
     /// Represents that the implemented classes are wizards. 
     /// </summary>
-    public interface IWizard : ICollection<_WizardPage>
+    public interface IWizard : ICollection<WizardPageBase>
     {
         #region Public Properties
 
@@ -33,7 +33,7 @@ namespace WizardFramework
         /// </summary>
         /// <typeparam name="T"> The type of the wizard page to be created. </typeparam>
         /// <returns> A <see cref="WizardPage" /> instance that is created. </returns>
-        T CreatePage<T>() where T : _WizardPage;
+        T CreatePage<T>() where T : WizardPageBase;
 
         /// <summary>
         /// Gets the data model from the wizard with specified model type. 
