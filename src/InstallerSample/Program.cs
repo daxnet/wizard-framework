@@ -1,21 +1,20 @@
 ﻿using InstallerSample.WizardPages;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InstallerSample
 {
-    static class Program
+    internal static class Program
     {
+        #region Private Methods
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             var culture = new CultureInfo("en-US");
 
@@ -32,5 +31,7 @@ namespace InstallerSample
             installer.Add(installer.CreatePage<FinishPage>());
             Application.Run(installer);
         }
+
+        #endregion Private Methods
     }
 }

@@ -1,24 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using InstallerSample.Properties;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WizardFramework;
-using InstallerSample.Properties;
 
 namespace InstallerSample.WizardPages
 {
     public partial class FeaturePage : WizardPage
     {
+        #region Public Constructors
+
         public FeaturePage(Wizard wizard)
             : base(Resources.FeaturePageTitle, Resources.FeaturePageDescription, wizard, new Model())
         {
             InitializeComponent();
         }
+
+        #endregion Public Constructors
+
+        #region Protected Properties
+
+        protected override Image Logo
+        {
+            get
+            {
+                return Resources.installer_logo;
+            }
+        }
+
+        #endregion Protected Properties
+
+        #region Protected Methods
 
         protected override Task ExecuteShowAsync(IWizardPage fromPage)
         {
@@ -44,27 +58,9 @@ namespace InstallerSample.WizardPages
             ModelAs<Model>().SelectedFolder = txtInstPath.Text;
         }
 
-        protected override Image Logo
-        {
-            get
-            {
-                return Resources.installer_logo;
-            }
-        }
+        #endregion Protected Methods
 
-        public sealed new class Model : IWizardModel
-        {
-            public string SelectedFeature { get; set; }
-            public string SelectedFolder { get; set; }
-
-            public override string ToString()
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine(string.Format(Resources.SelectedFeaturePattern, SelectedFeature));
-                sb.AppendLine(string.Format(Resources.InstallationFolderPattern, SelectedFolder));
-                return sb.ToString();
-            }
-        }
+        #region Private Methods
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
@@ -74,5 +70,34 @@ namespace InstallerSample.WizardPages
                 txtInstPath.Text = folderBrowserDialog.SelectedPath;
             }
         }
+
+        #endregion Private Methods
+
+        #region Public Classes
+
+        public sealed new class Model : IWizardModel
+        {
+            #region Public Properties
+
+            public string SelectedFeature { get; set; }
+
+            public string SelectedFolder { get; set; }
+
+            #endregion Public Properties
+
+            #region Public Methods
+
+            public override string ToString()
+            {
+                var sb = new StringBuilder();
+                sb.AppendLine(string.Format(Resources.SelectedFeaturePattern, SelectedFeature));
+                sb.AppendLine(string.Format(Resources.InstallationFolderPattern, SelectedFolder));
+                return sb.ToString();
+            }
+
+            #endregion Public Methods
+        }
+
+        #endregion Public Classes
     }
 }

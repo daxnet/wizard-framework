@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using InstallerSample.Properties;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using WizardFramework;
-using InstallerSample.Properties;
 
 namespace InstallerSample.WizardPages
 {
     public partial class WelcomePage : WizardPage
     {
+        #region Public Constructors
+
         public WelcomePage(Wizard wizard)
             : base(Resources.WelcomePageTitle, Resources.WelcomePageDescription, wizard, WizardPageType.Expanded)
         {
             InitializeComponent();
         }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
 
         protected override Task ExecuteShowAsync(IWizardPage fromPage)
         {
@@ -26,5 +24,7 @@ namespace InstallerSample.WizardPages
             this.lblDescription.Text = this.Description;
             return base.ExecuteShowAsync(fromPage);
         }
+
+        #endregion Protected Methods
     }
 }
