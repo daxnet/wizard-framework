@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WizardFramework.WPF
+﻿namespace WizardFramework.WPF
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using System.Windows.Forms;
     using System.Windows.Threading;
 
     using WizardFramework;
@@ -16,7 +9,7 @@ namespace WizardFramework.WPF
     /// <summary>
     /// The WPF wizard page model.
     /// </summary>
-    public class WpfWizardPageModel : WizardPageModel, INotifyPropertyChanged
+    public abstract class WpfWizardPageModel : WizardPageModel, INotifyPropertyChanged
     {
         private string title;
 
