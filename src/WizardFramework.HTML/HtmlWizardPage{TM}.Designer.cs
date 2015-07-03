@@ -23,13 +23,13 @@
             this.webView.AllowNavigation = false;
             this.webView.AllowWebBrowserDrop = false;
             this.webView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webView.IsWebBrowserContextMenuEnabled = true;
+            this.webView.IsWebBrowserContextMenuEnabled = false;
             this.webView.Location = new System.Drawing.Point(0, 0);
             this.webView.MinimumSize = new System.Drawing.Size(20, 20);
             this.webView.Name = "webView";
             this.webView.Size = new System.Drawing.Size(150, 150);
             this.webView.TabIndex = 0;
-            this.webView.WebBrowserShortcutsEnabled = true;
+            this.webView.WebBrowserShortcutsEnabled = false;
             // 
             // HtmlWizardPage
             // 
