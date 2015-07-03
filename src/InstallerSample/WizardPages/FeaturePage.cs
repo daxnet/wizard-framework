@@ -12,8 +12,8 @@ namespace InstallerSample.WizardPages
     {
         #region Public Constructors
 
-        public FeaturePage(Wizard wizard)
-            : base(Resources.FeaturePageTitle, Resources.FeaturePageDescription, wizard, new Model())
+        public FeaturePage(Wizard wizard, WizardPageModel pageModel)
+            : base(Resources.FeaturePageTitle, Resources.FeaturePageDescription, wizard, pageModel)
         {
             InitializeComponent();
         }
@@ -75,7 +75,7 @@ namespace InstallerSample.WizardPages
 
         #region Public Classes
 
-        public sealed new class Model : IWizardModel
+        public sealed new class Model : WizardPageModel
         {
             #region Public Properties
 

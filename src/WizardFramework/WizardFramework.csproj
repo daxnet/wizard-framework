@@ -54,6 +54,7 @@
     <Compile Include="IWizard.cs" />
     <Compile Include="IWizardModel.cs" />
     <Compile Include="IWizardPage.cs" />
+    <Compile Include="IWizardPageModel.cs" />
     <Compile Include="LengthyOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wizard.cs">
@@ -62,6 +63,7 @@
     <Compile Include="Wizard.Designer.cs">
       <DependentUpon>Wizard.cs</DependentUpon>
     </Compile>
+    <Compile Include="WizardModel.cs" />
     <Compile Include="WizardPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -69,6 +71,7 @@
       <DependentUpon>WizardPage.cs</DependentUpon>
     </Compile>
     <Compile Include="WizardPageDisplay.cs" />
+    <Compile Include="WizardPageModel.cs" />
     <Compile Include="WizardPageType.cs" />
     <Compile Include="WizardPageBase.cs">
       <SubType>UserControl</SubType>

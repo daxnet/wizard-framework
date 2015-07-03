@@ -16,7 +16,7 @@ namespace WizardFramework
 
         private readonly string description;
 
-        private readonly IWizardModel model;
+        private readonly IWizardPageModel model;
 
         private readonly string title;
 
@@ -65,7 +65,7 @@ namespace WizardFramework
         /// The <see cref="Wizard" /> instance which contains the current wizard page.
         /// </param>
         /// <param name="model"> The data model of the current wizard page. </param>
-        protected WizardPageBase(string title, string description, Wizard wizard, IWizardModel model)
+        protected WizardPageBase(string title, string description, Wizard wizard, WizardPageModel model)
             : this(title, description, wizard, model, WizardPageType.Standard)
         { }
 
@@ -79,7 +79,7 @@ namespace WizardFramework
         /// </param>
         /// <param name="model"> The data model of the current wizard page. </param>
         /// <param name="type"> The type of the current wizard page. </param>
-        protected WizardPageBase(string title, string description, Wizard wizard, IWizardModel model, WizardPageType type)
+        protected WizardPageBase(string title, string description, Wizard wizard, WizardPageModel model, WizardPageType type)
             : this()
         {
             this.title = title;
@@ -193,7 +193,7 @@ namespace WizardFramework
         /// </summary>
         /// <value> The data model. </value>
         [Browsable(false)]
-        public IWizardModel Model
+        public IWizardPageModel Model
         {
             get { return this.model; }
         }
@@ -306,7 +306,7 @@ namespace WizardFramework
         /// The type of the model to which the data model should be converted.
         /// </typeparam>
         /// <returns> The strongly typed data model. </returns>
-        protected T ModelAs<T>() where T : class, IWizardModel
+        protected T ModelAs<T>() where T : WizardPageModel
         {
             return this.model as T;
         }

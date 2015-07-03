@@ -12,7 +12,7 @@ namespace InstallerSample.WizardPages
         #region Public Constructors
 
         public InstallingPage(Wizard wizard)
-            : base(Resources.InstallingPageTitle, Resources.InstallingPageDescription, wizard)
+            : base(Resources.InstallingPageTitle, Resources.InstallingPageDescription, wizard, null)
         {
             InitializeComponent();
         }

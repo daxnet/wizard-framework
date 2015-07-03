@@ -68,7 +68,7 @@ namespace WizardFramework
         /// Gets the data model of the wizard page. 
         /// </summary>
         /// <value> The data model. </value>
-        IWizardModel Model { get; }
+        IWizardPageModel Model { get; }
 
         /// <summary>
         /// Gets the presentation of the wizard page. The presentation is a <see cref="UserControl"

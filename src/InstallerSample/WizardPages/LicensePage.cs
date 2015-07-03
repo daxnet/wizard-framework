@@ -14,7 +14,7 @@ namespace InstallerSample.WizardPages
         #region Public Constructors
 
         public LicensePage(Wizard wizard)
-            : base(Resources.LicensePageTitle, Resources.LicensePageDescription, wizard)
+            : base(Resources.LicensePageTitle, Resources.LicensePageDescription, wizard, null)
         {
             InitializeComponent();
         }

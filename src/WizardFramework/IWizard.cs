@@ -11,11 +11,16 @@ namespace WizardFramework
         #region Public Properties
 
         /// <summary>
+        /// Gets the model.
+        /// </summary>
+        WizardModel Model { get; }
+
+        /// <summary>
         /// Gets a list of <see cref="IWizardModel" /> instances that represent the data model for
         /// each wizard page in the wizard.
         /// </summary>
         /// <value> The list of <see cref="IWizardModel" /> instances. </value>
-        IEnumerable<IWizardModel> Models { get; }
+        IEnumerable<WizardPageModel> Models { get; }
 
         /// <summary>
         /// Gets or sets the text of the wizard. Usually this text will be displayed as the title of
@@ -40,7 +45,7 @@ namespace WizardFramework
         /// </summary>
         /// <typeparam name="T"> The <see cref="Type" /> of the model. </typeparam>
         /// <returns> The data model for the particular wizard page. </returns>
-        T GetWizardModel<T>() where T : class, IWizardModel;
+        T GetWizardModel<T>() where T : WizardPageModel;
 
         #endregion Public Methods
     }

@@ -21,24 +21,48 @@ namespace WizardFramework
 
         #region Private Fields
 
+        private readonly WizardModel model;
+
         private readonly List<Tuple<WizardPageBase, bool>> wizardPages = new List<Tuple<WizardPageBase, bool>>();
 
         private volatile int currentPageIndex = 0;
 
         #endregion Private Fields
 
-        #region Protected Constructors
+        #region Public Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Wizard" /> class. 
+        /// Initializes a new instance of the <see cref="Wizard"/> class.
         /// </summary>
-        protected Wizard()
+        /// <param name="model">
+        /// The wizard model.
+        /// </param>
+        public Wizard(WizardModel model)
+            : this()
         {
-            InitializeComponent();
+            this.model = model;
+
+            foreach (var pageModel in model)
+            {
+                this.Add(this.CreatePage(pageModel.Item1, pageModel.Item2));
+            }
+        }
+
+        #endregion
+
+        #region private Constructors
+
+        /// <summary>
+        /// Prevents a default instance of the <see cref="Wizard"/> class from being created.
+        /// </summary>
+        private Wizard()
+        {
+            this.InitializeComponent();
             if (this.components == null)
             {
                 this.components = new Container();
             }
+
             this.components.Add(new Disposer(this.OnDispose));
         }
 
@@ -100,9 +124,18 @@ namespace WizardFramework
         /// </summary>
         /// <value> The list of <see cref="IWizardModel" /> instances. </value>
         [Browsable(false)]
-        public IEnumerable<IWizardModel> Models
+        public IEnumerable<WizardPageModel> Models
         {
-            get { return this.wizardPages.Select(p => p.Item1.Model); }
+            get { return this.Model.PageModels; }
+        }
+
+        /// <summary>
+        /// Gets current wizard form model.
+        /// </summary>
+        [Browsable(false)]
+        public WizardModel Model
+        {
+            get { return model; }
         }
 
         /// <summary>
@@ -215,12 +248,20 @@ namespace WizardFramework
         /// </exception>
         public T CreatePage<T>() where T : WizardPageBase
         {
-            var constructorInfo = typeof(T).GetConstructor(new[] { typeof(Wizard) });
-            if (constructorInfo == null)
-            {
-                throw new InvalidOperationException("Cannot create a wizard page with no public constructor which takes the IWizard instance as its only parameter.");
-            }
-            return (T)Activator.CreateInstance(typeof(T), this);
+            this.model.Add(typeof(T), null);
+            return (T)this.CreatePage(typeof(T), null);
+        }
+
+        /// <summary>
+        /// The factory method for creating a wizard page with specific wizard type. 
+        /// </summary>
+        /// <param name="m"> The wizard page model. </param>
+        /// <typeparam name="T"> The type of the wizard page to be created.  </typeparam>
+        /// <returns> A <see cref="WizardPage"/> instance that is created.  </returns>
+        public T CreatePage<T>(WizardPageModel m) where T : WizardPageBase
+        {
+            this.model.Add(typeof(T), m);
+            return (T)this.CreatePage(typeof(T), m);
         }
 
         /// <summary>
@@ -238,9 +279,9 @@ namespace WizardFramework
         /// <summary>
         /// Gets the data model from the wizard with specified model type. 
         /// </summary>
-        /// <typeparam name="T"> The <see cref="Type" /> of the model. </typeparam>
+        /// <typeparam name="T"> The <see cref="Type" /> of the page model. </typeparam>
         /// <returns> The data model for the particular wizard page. </returns>
-        public T GetWizardModel<T>() where T : class, IWizardModel
+        public T GetWizardModel<T>() where T : WizardPageModel
         {
             if (this.Count > 0)
             {
@@ -495,14 +536,37 @@ namespace WizardFramework
 
         private void pnlContent_ControlRemoved(object sender, ControlEventArgs e)
         {
-            if (e.Control != null && 
-                e.Control.Tag != null && 
-                e.Control.Tag is bool && 
-                !(bool)e.Control.Tag && 
+            if (e.Control != null &&
+                e.Control.Tag != null &&
+                e.Control.Tag is bool &&
+                !(bool)e.Control.Tag &&
                 e.Control is WizardPageBase)
             {
                 (e.Control as WizardPageBase).PersistValuesToModel();
             }
+        }
+
+        /// <summary>
+        /// The factory method for creating a wizard page with specific wizard type. 
+        /// </summary>
+        /// <param name="type"> The type of wizard page. </param>
+        /// <param name="m"> The wizard page model. </param>
+        /// <returns> A <see cref="WizardPage"/> instance that is created.  </returns>
+        private WizardPageBase CreatePage(Type type, WizardPageModel m)
+        {
+            var constructorInfo = type.GetConstructor(new[] { typeof(Wizard), typeof(WizardPageModel) });
+            if (constructorInfo == null)
+            {
+                constructorInfo = type.GetConstructor(new[] { typeof(Wizard) });
+                if (constructorInfo == null)
+                {
+                    throw new InvalidOperationException("Cannot create a wizard page with no public constructor which takes the IWizard instance as its only parameter.");
+                }
+
+                return Activator.CreateInstance(type, this) as WizardPageBase;
+            }
+
+            return Activator.CreateInstance(type, this, m) as WizardPageBase;
         }
 
         private void ShowWizardPage(int index = 0)

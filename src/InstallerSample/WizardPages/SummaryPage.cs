@@ -10,7 +10,7 @@ namespace InstallerSample.WizardPages
         #region Public Constructors
 
         public SummaryPage(Wizard wizard)
-            : base(Resources.SummaryPageTitle, Resources.SummaryPageDescription, wizard)
+            : base(Resources.SummaryPageTitle, Resources.SummaryPageDescription, wizard, null)
         {
             InitializeComponent();
         }

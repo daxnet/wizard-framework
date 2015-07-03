@@ -36,16 +36,14 @@ namespace WizardFramework
         #region Protected Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WizardPage" /> class. 
+        /// Initializes a new instance of the <see cref="WizardPage"/> class. 
         /// </summary>
-        /// <param name="title"> The title of the current wizard page. </param>
-        /// <param name="description"> The description of the current wizard page. </param>
-        /// <param name="wizard">
-        /// The <see cref="Wizard" /> instance which contains the current wizard page.
-        /// </param>
-        /// <param name="model"> The data model of the current wizard page. </param>
-        protected WizardPage(string title, string description, Wizard wizard, IWizardModel model = null)
-            : this(title, description, wizard, model, WizardPageType.Standard)
+        /// <param name="title"> The title of the current wizard page.  </param>
+        /// <param name="description"> The description of the current wizard page.  </param>
+        /// <param name="wizard"> The <see cref="Wizard"/> instance which contains the current wizard page. </param>
+        /// <param name="pageModel"> The data model of the current wizard page.  </param>
+        protected WizardPage(string title, string description, Wizard wizard, WizardPageModel pageModel)
+            : this(title, description, wizard, pageModel, WizardPageType.Standard)
         { }
 
         /// <summary>
@@ -71,9 +69,10 @@ namespace WizardFramework
         /// </param>
         /// <param name="model"> The data model of the current wizard page. </param>
         /// <param name="type"> The type of the current wizard page. </param>
-        protected WizardPage(string title, string description, Wizard wizard, IWizardModel model, WizardPageType type)
+        protected WizardPage(string title, string description, Wizard wizard, WizardPageModel model, WizardPageType type)
             : base(title, description, wizard, model, type)
         { }
+
         #endregion Protected Constructors
 
         #region Private Constructors
@@ -123,7 +122,7 @@ namespace WizardFramework
         /// <returns></returns>
         internal static WizardPage GetEmptyPage(Wizard wizard)
         {
-            return new WizardPage("", "", wizard)
+            return new WizardPage("", "", wizard, null)
             {
                 CanGoCancel = false,
                 CanGoFinishPage = false,

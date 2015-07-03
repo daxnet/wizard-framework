@@ -22,14 +22,27 @@ namespace InstallerSample
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             var installer = new FrmInstaller();
             installer.Add(installer.CreatePage<WelcomePage>());
             installer.Add(installer.CreatePage<LicensePage>());
-            installer.Add(installer.CreatePage<FeaturePage>());
+            installer.Add(installer.CreatePage<FeaturePage>(new FeaturePage.Model()));
             installer.Add(installer.CreatePage<SummaryPage>());
             installer.Add(installer.CreatePage<InstallingPage>());
             installer.Add(installer.CreatePage<FinishPage>());
             Application.Run(installer);
+
+            /* Initialize page models and pages by host model */
+            var installerModel = new InstallerModel
+                {
+                    { typeof(WelcomePage), null },
+                    { typeof(LicensePage), null },
+                    { typeof(FeaturePage), new FeaturePage.Model() },
+                    { typeof(SummaryPage), null },
+                    { typeof(InstallingPage), null },
+                    { typeof(FinishPage), null },
+                };
+            Application.Run(new FrmInstaller(installerModel));
         }
 
         #endregion Private Methods
