@@ -20,11 +20,11 @@
         /// <param name="pageModel"> The data/view model of the current wizard page. </param>
         public WpfWizardPage(Wizard wizard, IWizardPageModel pageModel)
             : this(
-                ((WpfWizardPageModel)pageModel).Title,
-                ((WpfWizardPageModel)pageModel).Description, 
+                pageModel == null ? "" : ((WpfWizardPageModel)pageModel).Title,
+                pageModel == null ? "" : ((WpfWizardPageModel)pageModel).Description, 
                 wizard, 
-                pageModel, 
-                ((WpfWizardPageModel)pageModel).PageType)
+                pageModel,
+                pageModel == null ? WizardPageType.Standard : ((WpfWizardPageModel)pageModel).PageType)
         {
         }
 

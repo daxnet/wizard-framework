@@ -40,7 +40,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the title.
+        /// Gets the title.
         /// </summary>
         public string Title
         {
@@ -49,7 +49,7 @@
                 return title;
             }
 
-            set
+            private set
             {
                 title = value;
                 this.OnPropertyChanged();
@@ -57,7 +57,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the description.
+        /// Gets the description.
         /// </summary>
         public string Description
         {
@@ -66,7 +66,7 @@
                 return description;
             }
 
-            set
+            private set
             {
                 description = value;
                 this.OnPropertyChanged();
@@ -74,7 +74,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the page type.
+        /// Gets the page type.
         /// </summary>
         public WizardPageType PageType
         {
@@ -83,7 +83,7 @@
                 return pageType;
             }
 
-            set
+            private set
             {
                 pageType = value;
                 this.OnPropertyChanged();

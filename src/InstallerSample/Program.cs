@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace InstallerSample
 {
+    using InstallerSample.Properties;
+
+    using WizardFramework.HTML;
     using WizardFramework.WPF;
 
     internal static class Program
@@ -38,11 +41,13 @@ namespace InstallerSample
             var installerModel = new InstallerModel
                 {
                     { typeof(WpfWizardPage<WelcomeWpfPage>), new WelcomePageModel() },
+                    { typeof(HtmlWizardPage<WelcomeHtmlPageModel>), new WelcomeHtmlPageModel(Resources.WelcomeHtmlPage) { WelcomePageFlag = false } },
                     { typeof(LicensePage), null },
                     { typeof(FeaturePage), new FeaturePage.Model() },
                     { typeof(SummaryPage), null },
                     { typeof(InstallingPage), null },
                     { typeof(FinishPage), null },
+                    { typeof(HtmlWizardPage<HtmlWizardPageModel>), new HtmlWizardPageModel(new Uri("http://www.cnblogs.com/daxnet/p/4612509.html")) }
                 };
             Application.Run(new FrmInstaller(installerModel));
         }

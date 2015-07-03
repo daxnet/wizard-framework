@@ -65,6 +65,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="WizardPages\WelcomeHtmlPageModel.cs" />
     <Compile Include="WizardPages\FeaturePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -170,6 +171,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WizardFramework.HTML\WizardFramework.HTML.csproj">
+      <Project>{051fb879-737d-4710-b950-f487b2c783d1}</Project>
+      <Name>WizardFramework.HTML</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WizardFramework.WPF\WizardFramework.WPF.csproj">
       <Project>{7153c96e-2ff0-444c-accf-8b443d893dbd}</Project>
       <Name>WizardFramework.WPF</Name>
@@ -184,6 +189,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
+    <Content Include="WizardPages\WelcomeHtmlPage.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Page Include="WizardPages\WelcomeWpfPage.xaml">
