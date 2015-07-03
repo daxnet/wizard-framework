@@ -12,7 +12,7 @@ namespace InstallerSample.WizardPages
     {
         #region Public Constructors
 
-        public FeaturePage(Wizard wizard, WizardPageModel pageModel)
+        public FeaturePage(Wizard wizard, IWizardPageModel pageModel)
             : base(Resources.FeaturePageTitle, Resources.FeaturePageDescription, wizard, pageModel)
         {
             InitializeComponent();

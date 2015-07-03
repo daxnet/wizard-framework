@@ -36,8 +36,11 @@
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +49,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FrmInstaller.cs">
@@ -96,6 +100,9 @@
     </Compile>
     <Compile Include="WizardPages\WelcomePage.Designer.cs">
       <DependentUpon>WelcomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WizardPages\WelcomeWpfPage.xaml.cs">
+      <DependentUpon>WelcomeWpfPage.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FrmInstaller.resx">
       <DependentUpon>FrmInstaller.cs</DependentUpon>
@@ -163,6 +170,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WizardFramework.WPF\WizardFramework.WPF.csproj">
+      <Project>{7153c96e-2ff0-444c-accf-8b443d893dbd}</Project>
+      <Name>WizardFramework.WPF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WizardFramework\WizardFramework.csproj">
       <Project>{72abbfd2-962f-4777-aef0-6151e9c7bebc}</Project>
       <Name>WizardFramework</Name>
@@ -173,6 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="WizardPages\WelcomeWpfPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

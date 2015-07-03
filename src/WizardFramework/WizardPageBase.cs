@@ -11,7 +11,6 @@ namespace WizardFramework
     /// </summary>
     public abstract partial class WizardPageBase : UserControl, IWizardPage
     {
-
         #region Private Fields
 
         private readonly string description;
@@ -21,6 +20,21 @@ namespace WizardFramework
         private readonly string title;
 
         private readonly Wizard wizard;
+
+        /// <summary>
+        /// Represents the empty task.
+        /// </summary>
+        protected readonly Task TaskEmpty = Task.Factory.StartNew(() => { });
+
+        /// <summary>
+        /// Represents the task that simply returns the <c>False</c> value.
+        /// </summary>
+        protected readonly Task<bool> TaskFalse = Task.Factory.StartNew(() => false);
+
+        /// <summary>
+        /// Represents the task that simply returns the <c>False</c> value.
+        /// </summary>
+        protected readonly Task<bool> TaskTrue = Task.Factory.StartNew(() => true);
 
         private bool canGoCancel;
 
@@ -65,7 +79,7 @@ namespace WizardFramework
         /// The <see cref="Wizard" /> instance which contains the current wizard page.
         /// </param>
         /// <param name="model"> The data model of the current wizard page. </param>
-        protected WizardPageBase(string title, string description, Wizard wizard, WizardPageModel model)
+        protected WizardPageBase(string title, string description, Wizard wizard, IWizardPageModel model)
             : this(title, description, wizard, model, WizardPageType.Standard)
         { }
 
@@ -79,7 +93,7 @@ namespace WizardFramework
         /// </param>
         /// <param name="model"> The data model of the current wizard page. </param>
         /// <param name="type"> The type of the current wizard page. </param>
-        protected WizardPageBase(string title, string description, Wizard wizard, WizardPageModel model, WizardPageType type)
+        protected WizardPageBase(string title, string description, Wizard wizard, IWizardPageModel model, WizardPageType type)
             : this()
         {
             this.title = title;

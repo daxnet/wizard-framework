@@ -554,7 +554,7 @@ namespace WizardFramework
         /// <returns> A <see cref="WizardPage"/> instance that is created.  </returns>
         private WizardPageBase CreatePage(Type type, WizardPageModel m)
         {
-            var constructorInfo = type.GetConstructor(new[] { typeof(Wizard), typeof(WizardPageModel) });
+            var constructorInfo = type.GetConstructor(new[] { typeof(Wizard), typeof(IWizardPageModel) });
             if (constructorInfo == null)
             {
                 constructorInfo = type.GetConstructor(new[] { typeof(Wizard) });

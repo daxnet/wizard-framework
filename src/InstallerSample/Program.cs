@@ -6,6 +6,8 @@ using System.Windows.Forms;
 
 namespace InstallerSample
 {
+    using WizardFramework.WPF;
+
     internal static class Program
     {
         #region Private Methods
@@ -35,7 +37,7 @@ namespace InstallerSample
             /* Initialize page models and pages by host model */
             var installerModel = new InstallerModel
                 {
-                    { typeof(WelcomePage), null },
+                    { typeof(WpfWizardPage<WelcomeWpfPage>), new WelcomePageModel() },
                     { typeof(LicensePage), null },
                     { typeof(FeaturePage), new FeaturePage.Model() },
                     { typeof(SummaryPage), null },

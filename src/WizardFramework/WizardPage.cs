@@ -13,26 +13,6 @@ namespace WizardFramework
     /// </remarks>
     public partial class WizardPage : WizardPageBase
     {
-
-        #region Protected Fields
-
-        /// <summary>
-        /// Represents the empty task.
-        /// </summary>
-        protected readonly Task TaskEmpty = Task.Factory.StartNew(() => { });
-
-        /// <summary>
-        /// Represents the task that simply returns the <c>False</c> value.
-        /// </summary>
-        protected readonly Task<bool> TaskFalse = Task.Factory.StartNew(() => false);
-
-        /// <summary>
-        /// Represents the task that simply returns the <c>False</c> value.
-        /// </summary>
-        protected readonly Task<bool> TaskTrue = Task.Factory.StartNew(() => true);
-
-        #endregion Protected Fields
-
         #region Protected Constructors
 
         /// <summary>
@@ -42,7 +22,7 @@ namespace WizardFramework
         /// <param name="description"> The description of the current wizard page.  </param>
         /// <param name="wizard"> The <see cref="Wizard"/> instance which contains the current wizard page. </param>
         /// <param name="pageModel"> The data model of the current wizard page.  </param>
-        protected WizardPage(string title, string description, Wizard wizard, WizardPageModel pageModel)
+        protected WizardPage(string title, string description, Wizard wizard, IWizardPageModel pageModel)
             : this(title, description, wizard, pageModel, WizardPageType.Standard)
         { }
 
@@ -69,7 +49,7 @@ namespace WizardFramework
         /// </param>
         /// <param name="model"> The data model of the current wizard page. </param>
         /// <param name="type"> The type of the current wizard page. </param>
-        protected WizardPage(string title, string description, Wizard wizard, WizardPageModel model, WizardPageType type)
+        protected WizardPage(string title, string description, Wizard wizard, IWizardPageModel model, WizardPageType type)
             : base(title, description, wizard, model, type)
         { }
 
@@ -170,6 +150,7 @@ namespace WizardFramework
         {
             return TaskTrue;
         }
+
         /// <summary>
         /// The callback method being executed when the current wizard page is showing. 
         /// </summary>
